@@ -13,11 +13,9 @@
 <!-- use jinja 2 loop to dynamically display each index of the paragraphs list parsed by beautiful soup-->
     <h3>Games Played</h3>
     <ul>
-        {% for value in data.Paragraphs %}
         <li>
-            {{value}}
+            {{data.games_played}}
         </li>
-        {% endfor %}
     </ul>
 
 <!--Button to go back to main page-->

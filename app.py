@@ -27,6 +27,7 @@ def scrape():
 
         #games played, parsing all paragraphs, then finding the text of the paragraph desired.
         paragraphs = soup.find_all('p')
+        print("pargraphs array", paragraphs)
         games_played_content = paragraphs[13].get_text() if len(paragraphs) > 13 else "No Info on Games Played"
 
         #par = [p.get_text() for p in soup.find_all('p')]
@@ -34,7 +35,7 @@ def scrape():
 
         data = {
             'title': title,
-            'Paragraphs': games_played_content,
+            'games_played': games_played_content,
         }
 
         return render_template('results.html', data=data)
