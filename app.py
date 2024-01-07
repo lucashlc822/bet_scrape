@@ -18,17 +18,30 @@ def scrape():
     #Use the requests.get method to make an HTTP GET request to the specified URL. The try block handles the potential exceptions that may occur during the request. response.raise_for_status() checks if the request was successful, and if not, it raises an exception.
     try:
         response = requests.get(url)
-        response.raise_for_status()
+        response.raise_for_status() #returns HTTP error object if error occured when tryig to get a response from the URL
         
         soup = BeautifulSoup(response.text, 'html.parser')
+
         title = soup.title.string if soup.title else 'No title found'
-        return render_template('result.html', title=title)
+        #extracts the title of the url as a string, title becomes 'no title found' if the title cannot be found.
+
+        #games played, parsing all paragraphs, then finding the text of the paragraph desired.
+        paragraphs = soup.find_all('p')
+        games_played_content = paragraphs[13].get_text() if len(paragraphs) > 13 else "No Info on Games Played"
+
+        #par = [p.get_text() for p in soup.find_all('p')]
+        # extract the text values of each paragraph on the website and append them into a list.
+
+        data = {
+            'title': title,
+            'Paragraphs': games_played_content,
+        }
+
+        return render_template('results.html', data=data)
     
     except requests.exceptions.RequestException as e:
         return f"Error: {e}"
     
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-werewrrewe 
+    
