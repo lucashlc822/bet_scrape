@@ -30,8 +30,10 @@ def scrape():
         print("pargraphs array", paragraphs)
         games_played_content = paragraphs[13].get_text() if len(paragraphs) > 13 else "No Info on Games Played"
         
+        #statistics scraping
         ppg = paragraphs[15].get_text() if len(paragraphs) > 15 else "No Info on Points Per Game"
-        rbnd = paragraphs[17].get_text() if len(paragraphs) > 17 else "No info on Rebounds Per Game"
+        rbnd = paragraphs[17].get_text() if len(paragraphs) > 17 else "No Info on Rebounds Per Game"
+        asst = paragraphs[19].get_text() if len(paragraphs) > 19 else "No Info on Assists Per Game"
 
         #par = [p.get_text() for p in soup.find_all('p')]
         #print("par output", par)
@@ -42,6 +44,7 @@ def scrape():
             'games_played': games_played_content,
             'ppg': ppg,
             'rebounds': rbnd,
+            'assists': asst,
         }
 
         return render_template('results.html', data=data)
