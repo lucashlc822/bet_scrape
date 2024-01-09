@@ -11,11 +11,17 @@
     <p>Title: {{ data.title }}</p>
 
 <!-- use jinja 2 loop to dynamically display each index of the paragraphs list parsed by beautiful soup-->
-    <h3>Games Played</h3>
+    <h3>2023 Player Stats</h3>
     <ul>
-        <li>
-            {{data.games_played}}
-        </li>
+        <p>Games Played</p>
+        <li>{{data.games_played}}</li>
+        <p>Points Per Game</p>
+        <li>{{data.ppg}}</li>
+        <p>Rebounds Per Game</p>
+        <li>{{data.rebounds}}
+        <!-- {% for value in data.paragraphs %}
+            <li> {{value}} </li>
+        {% endfor %} -->
     </ul>
 
 <!--Button to go back to main page-->

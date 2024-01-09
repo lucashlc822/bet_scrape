@@ -29,13 +29,19 @@ def scrape():
         paragraphs = soup.find_all('p')
         print("pargraphs array", paragraphs)
         games_played_content = paragraphs[13].get_text() if len(paragraphs) > 13 else "No Info on Games Played"
+        
+        ppg = paragraphs[15].get_text() if len(paragraphs) > 15 else "No Info on Points Per Game"
+        rbnd = paragraphs[17].get_text() if len(paragraphs) > 17 else "No info on Rebounds Per Game"
 
         #par = [p.get_text() for p in soup.find_all('p')]
+        #print("par output", par)
         # extract the text values of each paragraph on the website and append them into a list.
 
         data = {
             'title': title,
             'games_played': games_played_content,
+            'ppg': ppg,
+            'rebounds': rbnd,
         }
 
         return render_template('results.html', data=data)
