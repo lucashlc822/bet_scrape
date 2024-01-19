@@ -26,21 +26,31 @@ def scrape():
         #extracts the title of the url as a string, title becomes 'no title found' if the title cannot be found.
         
         #player name:
+        name_div_id = "meta"
+        name_div = soup.find('div', {'id': name_div_id})
+        player_name = "No Name"
         
-        name_class = ""
+        if name_div:
+            name_h1 = soup.find_all('h1')
+            print(name_h1)
+            if len(name_h1) >= 0:
+                player_name = name_h1[0].get_text()
+        
+        
         #player stats section:
         stats_div_class_1 = "p1"
         stats_div = soup.find('div', {'class': stats_div_class_1})
         
         if stats_div:
             stats_paragraphs = stats_div.find_all('p')
-            games_played = stats_paragraphs[0].get_text() if len(stats_paragraphs) > 0 else "No Ganes Played Found"
+            games_played = stats_paragraphs[0].get_text() if len(stats_paragraphs) > 0 else "No Games Played Found"
             ppg = stats_paragraphs[2].get_text() if len(stats_paragraphs) > 2 else "No PPG Found"
             rebounds = stats_paragraphs[4].get_text() if len(stats_paragraphs) > 4 else "No Rebounds Found"
             assists = stats_paragraphs[6].get_text() if len(stats_paragraphs) > 6 else "No Assists Found"
             
             data = {
             'title': title,
+            'Name': player_name,
             'GP': games_played,
             'PPG': ppg,
             'Rebounds': rebounds,
