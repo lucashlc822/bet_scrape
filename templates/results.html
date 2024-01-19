@@ -8,20 +8,20 @@
 </head>
 <body>
     <h2>Scraping Result</h2>
-    <p>Title: {{ data.title }}</p>
+    <p>Title: {{data.title}}</p>
 
 <!-- use jinja 2 loop to dynamically display each index of the paragraphs list parsed by beautiful soup-->
     <h3>2023 Player Stats</h3>
     <ul>
-        <p>Games Played</p>
-        <li>{{data.games_played}}</li>
+        <p> Games Played</p>
+        <li>{{data.GP}}</li>
         <p>Points Per Game</p>
-        <li>{{data.ppg}}</li>
-        <p>Rebounds Per Game</p>
-        <li>{{data.rebounds}}
-        <p>Assists Per Game</p>
-        <li>{{data.assists}}</li>
-
+        <li>{{data.PPG}}</li>
+        <p> Assists</p>
+        <li>{{data.Assists}}
+        <p>Rebounds</p>
+        <li>{{data.Rebounds}}
+        
         <!-- {% for value in data.paragraphs %}
             <li> {{value}} </li>
         {% endfor %} -->
