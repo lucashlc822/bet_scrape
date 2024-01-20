@@ -50,15 +50,6 @@ def scrape():
             
             data = {
             'title': title,
-<<<<<<< HEAD
-            'games_played': games_played_content,
-            'ppg': ppg,
-            'rebounds': rbnd,
-            'assists': asst,
-        }
-
-        return render_template('results.html', data=data)   
-=======
             'Name': player_name,
             'GP': games_played,
             'PPG': ppg,
@@ -73,9 +64,6 @@ def scrape():
             print(stats_div)
             return render_template('failed.html', stats_div = stats_div)
             
-        
->>>>>>> bf6d2568057952ef88769ca665f02a60e78b42a9
-    
     except requests.exceptions.RequestException as e:
         return f"Error: {e}"
     
