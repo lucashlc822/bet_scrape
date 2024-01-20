@@ -24,23 +24,33 @@ def scrape():
 
         title = soup.title.string if soup.title else 'No title found'
         #extracts the title of the url as a string, title becomes 'no title found' if the title cannot be found.
-
-        #games played, parsing all paragraphs, then finding the text of the paragraph desired.
-        paragraphs = soup.find_all('p')
-        print("pargraphs array", paragraphs)
-        games_played_content = paragraphs[13].get_text() if len(paragraphs) > 13 else "No Info on Games Played"
         
-        #statistics scraping
-        ppg = paragraphs[15].get_text() if len(paragraphs) > 15 else "No Info on Points Per Game"
-        rbnd = paragraphs[17].get_text() if len(paragraphs) > 17 else "No Info on Rebounds Per Game"
-        asst = paragraphs[19].get_text() if len(paragraphs) > 19 else "No Info on Assists Per Game"
-
-        #par = [p.get_text() for p in soup.find_all('p')]
-        #print("par output", par)
-        # extract the text values of each paragraph on the website and append them into a list.
-
-        data = {
+        #player name:
+        name_div_id = "meta"
+        name_div = soup.find('div', {'id': name_div_id})
+        player_name = "No Name"
+        
+        if name_div:
+            name_h1 = soup.find_all('h1')
+            print(name_h1)
+            if len(name_h1) >= 0:
+                player_name = name_h1[0].get_text()
+        
+        
+        #player stats section:
+        stats_div_class_1 = "p1"
+        stats_div = soup.find('div', {'class': stats_div_class_1})
+        
+        if stats_div:
+            stats_paragraphs = stats_div.find_all('p')
+            games_played = stats_paragraphs[0].get_text() if len(stats_paragraphs) > 0 else "No Games Played Found"
+            ppg = stats_paragraphs[2].get_text() if len(stats_paragraphs) > 2 else "No PPG Found"
+            rebounds = stats_paragraphs[4].get_text() if len(stats_paragraphs) > 4 else "No Rebounds Found"
+            assists = stats_paragraphs[6].get_text() if len(stats_paragraphs) > 6 else "No Assists Found"
+            
+            data = {
             'title': title,
+<<<<<<< HEAD
             'games_played': games_played_content,
             'ppg': ppg,
             'rebounds': rbnd,
@@ -48,6 +58,23 @@ def scrape():
         }
 
         return render_template('results.html', data=data)   
+=======
+            'Name': player_name,
+            'GP': games_played,
+            'PPG': ppg,
+            'Rebounds': rebounds,
+            'Assists': assists,
+            }
+        
+            return render_template('results.html', data=data)
+        
+        else:
+            stats_div = f'No Div found with class "{stats_div_class_1}" found'
+            print(stats_div)
+            return render_template('failed.html', stats_div = stats_div)
+            
+        
+>>>>>>> bf6d2568057952ef88769ca665f02a60e78b42a9
     
     except requests.exceptions.RequestException as e:
         return f"Error: {e}"
