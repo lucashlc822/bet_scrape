@@ -47,7 +47,7 @@ def scrape():
             'assists': asst,
         }
 
-        return render_template('results.html', data=data)
+        return render_template('results.html', data=data)   
     
     except requests.exceptions.RequestException as e:
         return f"Error: {e}"
