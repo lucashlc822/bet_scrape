@@ -2,7 +2,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import pandas as pd
 
-uri = "mongodb+srv://lucashlc:@nba.kewvdct.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://lucashlc:NBAurl12345@nba.kewvdct.mongodb.net/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
