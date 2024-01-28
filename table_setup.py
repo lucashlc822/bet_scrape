@@ -17,9 +17,10 @@ except Exception as e:
 db = client["players"] #select the players database
 collection = db["URL"] #select the URL collection (table/document)
 
-excel_file_path = 'Database.xlsx'
-df = pd.read_excel(excel_file_path, engine='openpyxl') #convert the excel file into a pandas dataframe object
+#excel_file_path = 'Database.xlsx'
 
-append_data = df.to_dict(orient='records') #convert the pandas dataframe object into a dictionary.
+#df = pd.read_excel(excel_file_path, engine='openpyxl') #convert the excel file into a pandas dataframe object
 
-collection.insert_many(append_data)  #append dicionary into the collection document/table on MongoDB
+#append_data = df.to_dict(orient='records') #convert the pandas dataframe object into a dictionary.
+
+#collection.insert_many(append_data)  #append dicionary into the collection document/table on MongoDB
