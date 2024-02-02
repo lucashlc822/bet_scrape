@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import requests
 
@@ -29,19 +29,26 @@ collection = db["URL"]
 def index():
     return render_template('index.html')
 
+#Route for dropdown menu
+@app.route('/flask_route', methods=['POST'])
+def flask_route():
+    search_query = request.form.get('url')
+    return search_query
+
+
 #Define a route for the /scrape URL with the HTTP method set to POST. This means that the function will be called when a POST request is made to the /scrape endpoint. The function retrieves the URL submitted in the form data.
 @app.route('/scrape', methods=['POST'])
 def scrape():
     
-    searched_name = request.form['url']
-    search = collection.find_one({'Player': searched_name})
-    print(search)
+    searched_name = request.form['url'] #assigning a variable for the input of the form.
+    search_document = collection.find_one({'Player': searched_name}) #query the database to find a document that has a Player key that is the same as the form input. Search variable becomes the
+    print(search_document)
     #search collection and find a row where the Player key matches the serached name from the form.
     
-    if search:
-        desired_url =  search.get('URL', 'Default Value') #Returns Default Value if the URL key is not found.
+    if search_document:
+        desired_url =  search_document.get('URL', 'Default Value') #Returns Default Value if the URL key is not found.
     else:
-        desired_url = 'No match found'
+        desired_url = 'No match found' #need to make a route for when a player is not found. will require new html.
     
     #Use the requests.get method to make an HTTP GET request to the specified URL. The try block handles the potential exceptions that may occur during the request. response.raise_for_status() checks if the request was successful, and if not, it raises an exception.
     try:

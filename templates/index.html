@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <eta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="Xm-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Scraper</title>
@@ -10,8 +10,21 @@
     <h1>Web Scraper</h1>
     <form action="/scrape" method="post">
         <label for="url">Enter URL:</label>
-        <input type="text" id="url" name="url" required>
+        <input type="text" id="url" name="url" required onclick="sendRequest()">
+
+        <!--Code for Dropdown menu upon selecting the input section of the form-->
+        <select name="dropdown_menu" id="dropdown" size="10"> <!-- size limits number of entries shown when the dropdown opens-->
+        </select>
         <button type="submit">Scrape</button>
+
+        <script>
+            function sendRequest() {
+                fetch('/flask_route')
+                    .then(response => response.text())
+                    .then(data => console.log(data))
+                    .catch(error => console.error('Error:', error));
+            }
+        </script>
     </form>
 </body>
 </html>
