@@ -30,10 +30,15 @@ def index():
     return render_template('index.html')
 
 #Route for dropdown menu
-@app.route('/flask_route', methods=['POST'])
-def flask_route():
-    search_query = request.form.get('url')
-    return search_query
+@app.route('/get_options')
+def get_options():
+    search_value = request.args.get('url')
+    print(f"Search Value: {search_value}")
+    
+    options = collection.distinct('Player', {'Player': {'$regex': search_value, '$options': 'i'}})
+    print(f"Options: {options}")
+    
+    return jsonify(options)
 
 
 #Define a route for the /scrape URL with the HTTP method set to POST. This means that the function will be called when a POST request is made to the /scrape endpoint. The function retrieves the URL submitted in the form data.
