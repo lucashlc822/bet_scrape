@@ -35,7 +35,7 @@ def get_options():
     search_value = request.args.get('url')
     print(f"Search Value: {search_value}")
     
-    options = collection.distinct('Player', {'Player': {'$regex': search_value, '$options': 'i'}})
+    options = collection.distinct('Player', {'Player': {'$regex': search_value, '$options': 'i'}}) #used for regular expression searches on MongoDB, to parse for database fields that match the input element. 
     print(f"Options: {options}")
     
     return jsonify(options)
@@ -75,6 +75,15 @@ def scrape():
             print(name_h1)
             if len(name_h1) >= 0:
                 player_name = name_h1[0].get_text()
+                
+        #player image:
+        face_div_id = "media_item"
+        face_div = soup.find('class', {'class': face_div_id})
+        if face_div:
+            img = soup.find_all('img')
+            if len(img) >= 0:
+                player_face = img[0]
+                print(player_face)
         
         
         #player stats section:
@@ -90,6 +99,7 @@ def scrape():
             
             data = {
             'title': title,
+            'face': player_face,
             'Name': player_name,
             'GP': games_played,
             'PPG': ppg,
