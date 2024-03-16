@@ -15,9 +15,9 @@ except Exception as e:
     print(e)
 
 db = client["players"] #select the players database
-collection = db["URL"] #select the URL collection (table/document)
+collection = db["teams_url"] #select the URL collection (table/document)
 
-excel_file_path = 'Database.xlsx'
+excel_file_path = 'Teams.xlsx'
 
 df = pd.read_excel(excel_file_path, engine='openpyxl') #convert the excel file into a pandas dataframe object
 
