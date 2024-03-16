@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
+import base64
 import requests
 
 #mongodb libraries
@@ -77,14 +78,13 @@ def scrape():
                 player_name = name_h1[0].get_text()
                 
         #player image:
-        face_div_id = "media_item"
-        face_div = soup.find('class', {'class': face_div_id})
+        face_div_id = "media-item"
+        face_div = soup.find('div', {'class': face_div_id})
         if face_div:
-            img = soup.find_all('img')
-            if len(img) >= 0:
-                player_face = img[0]
-                print(player_face)
-        
+            img_tags = soup.find_all('img')
+            player_img = (img_tags[1])
+            player_image_url = player_img['src']
+            print(player_image_url)
         
         #player stats section:
         stats_div_class_1 = "p1"
@@ -99,7 +99,7 @@ def scrape():
             
             data = {
             'title': title,
-            'face': player_face,
+            'player_image': player_image_url,
             'Name': player_name,
             'GP': games_played,
             'PPG': ppg,
