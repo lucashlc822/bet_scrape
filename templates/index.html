@@ -8,14 +8,15 @@
 </head>
 <body>
     <h1>Web Scraper</h1>
+<!-- -------player search area------------ -->
     <form action="/scrape" method="POST">
-        <label for="url">Enter URL:</label>
+        <label for="url">Player Search:</label>
         <input type="text" id="url" name="url" required oninput="getOptions(this.value)">
 
         <!--Code for Dropdown menu upon selecting the input section of the form-->
         <select name="options" id="options" size="10" onchange="fillInput(this.value)"> <!-- size limits number of entries shown when the dropdown opens-->
         </select>
-        <button type="submit">Scrape</button>
+        <button type="submit">Search</button>
 
         <script>
             function getOptions(searchValue) {
@@ -39,5 +40,38 @@
             }
         </script>
     </form>
+
+    <!-- --------team search area-------- -->
+    <form action="/team_scrape" method="POST">
+        <label for="team_url">Team Search:</label>
+        <input type="input" id="team_url" name="team_url" required oninput="getTeamOptions(this.value)">
+        <!-- Teams Dropdown Box  -->
+        <select name="team_options" id="team_options" size="10" onchange="fillTeamInput(this.value)"></select>
+        <button type="submit">Search</button>
+
+        <script>
+            function getTeamOptions(searchValue) {
+                fetch(`/get_team_options?team_url=${encodeURIComponent(searchValue)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('team_options');
+                    select.innerHTML = '';
+                    data.forEach(option => {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = option;
+                        optionElement.text = option;
+                        select.add(optionElement);
+                    });
+                });
+            }
+
+            function fillTeamInput(selectedValue) {
+                const input = document.getElementById("team_url")
+                input.value = selectedValue;
+            }
+        </script>
+    </form>
+
+    
 </body>
 </html>

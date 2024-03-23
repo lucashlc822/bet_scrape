@@ -24,6 +24,7 @@ except Exception as e:
 
 db = client["players"]
 collection = db["URL"]
+collection2 = db["teams_url"]
 
 #Define a route for the root URL ('/'). When a user accesses the root URL, the index function is called. This function renders the index.html template.
 @app.route('/')
@@ -37,6 +38,17 @@ def get_options():
     print(f"Search Value: {search_value}")
     
     options = collection.distinct('Player', {'Player': {'$regex': search_value, '$options': 'i'}}) #used for regular expression searches on MongoDB, to parse for database fields that match the input element. 
+    print(f"Options: {options}")
+    
+    return jsonify(options)
+
+#Route for team options
+@app.route('/get_team_options')
+def get_team_options():
+    search_value = request.args.get('team_url')
+    print(f"Search Value: {search_value}")
+
+    options = collection2.distinct('Team', {'Team': {'$regex': search_value, '$options': 'i'}})
     print(f"Options: {options}")
     
     return jsonify(options)
