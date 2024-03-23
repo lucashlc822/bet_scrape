@@ -128,6 +128,75 @@ def scrape():
             
     except requests.exceptions.RequestException as e:
         return f"Error: {e}"
+
+# ---------------team scrape--------------
+@app.route('/team_scrape', methods=['POST'])
+def team_scrape():
+    searched_name = request.form['team_url'] #assigning a variable for the input of the form.
+    search_document = collection2.find_one({'Team': searched_name}) #query the database to find a document that has a Player key that is the same as the form input. Search variable becomes the
+    print(search_document)
+
+    if search_document:
+        stats_url = search_document.get('Stats URL', 'Default Value') #Returns Default Value if the URL key is not found.
+        record_url = search_document.get('Record URL', 'Default Value')
+    else:
+        stats_url = 'No match found' #need to make a route for when a player is not found. will require new html.
+        record_url = 'No match found'
+    #search collection and find a row where the Player key matches the serached name from the form.
+    
+    try:
+        # response for stats url
+        response1 = requests.get(stats_url)
+        response1.raise_for_status() #returns HTTP error object if error occured when tryig to get a response from the URL
+        
+        # response for record url
+        response2 = requests.get(record_url)
+        response2.raise_for_status()
+
+        stats_soup = BeautifulSoup(response1.text, 'html.parser')
+        record_soup = BeautifulSoup(response2.text, 'html.parser')
+
+        title = stats_soup.title.string if stats_soup.title else 'No title found'
+        #extracts the title of the url as a string, title becomes 'no title found' if the title cannot be found.
+
+
+        h2_id = "team_and_opponent_sh"
+        h2_elements = stats_soup.find('div', {'id': h2_id})
+        if h2_elements:
+            table_h2 = h2_elements.find_all('h2')
+            if len(table_h2) >= 0:
+                h2 = table_h2[0].get_text()
+                print(h2)
+
+        team_stats_table = stats_soup.find('table', id='team_and_opponent')
+
+        # Check if the table is found
+        if team_stats_table:
+            # Find the headers
+            headers = [th.text for th in team_stats_table.find_all('th')]
+            
+            # Find data rows
+            data_rows = team_stats_table.find_all('tr')[2:]  # Skip the first two rows as they contain headers and totals
+            
+            # Extract and print the data
+            print("Team Stats:")
+            print("\t".join(headers))
+            for row in data_rows:
+                cells = [cell.text.strip() for cell in row.find_all(['th', 'td'])]
+                print("\t".join(cells))
+        else:
+            print("Team stats table not found.")
+
+        data = {
+            'title': title,
+        }
+        
+        return render_template('team_results.html', data=data)
+
+    except requests.exceptions.RequestException as e:
+        return f"Error: {e}"
+
+    
     
 if __name__ == '__main__':
     app.run(debug=True)
