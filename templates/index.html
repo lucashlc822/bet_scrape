@@ -5,9 +5,28 @@
     <meta http-equiv="Xm-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Scraper</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Web Scraper</h1>
+    <header>
+        <div class="nav-container">
+            <nav>
+                <h1 class="logo">Bet Scrape</h1>
+                <i class="fa-solid fa-basketball"></i>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Search</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-text">
+            <p>Looking to increase your betting odds?</p>
+            <h1>Search for Player Info below!</h1>
+        </div>
+
+    </header>
+
 <!-- -------player search area------------ -->
     <form action="/scrape" method="POST">
         <label for="url">Player Search:</label>

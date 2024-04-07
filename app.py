@@ -9,7 +9,7 @@ from pymongo.server_api import ServerApi
 import pandas as pd
 
 #Create a Flask web application instance named app.
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 
 #Initalize MongoDB
