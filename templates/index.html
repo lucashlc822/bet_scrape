@@ -12,9 +12,9 @@
         <div class="nav-container">
             <nav>
                 <h1 class="logo">Bet Scrape</h1>
-                <i class="fa-solid fa-basketball"></i>
+                <img src="" alt="">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#Search">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Search</a></li>
                 </ul>
@@ -22,20 +22,20 @@
         </div>
         <div class="header-text">
             <p>Looking to increase your betting odds?</p>
-            <h1>Search for Player Info below!</h1>
+            <h1><span>Search</span> for Player Info below!</h1>
         </div>
 
     </header>
 
 <!-- -------player search area------------ -->
-    <form action="/scrape" method="POST">
+    <form action="/scrape" method="POST" id="Search">
         <label for="url">Player Search:</label>
         <input type="text" id="url" name="url" required oninput="getOptions(this.value)">
+        <button type="submit">Search</button>
 
         <!--Code for Dropdown menu upon selecting the input section of the form-->
         <select name="options" id="options" size="10" onchange="fillInput(this.value)"> <!-- size limits number of entries shown when the dropdown opens-->
         </select>
-        <button type="submit">Search</button>
 
         <script>
             function getOptions(searchValue) {
@@ -57,16 +57,35 @@
                 const input = document.getElementById('url')
                 input.value = selectedValue; 
             }
+// managing the player dropdown visibility
+            var inputField = document.getElementById('url');
+            var dropdownMenu = document.getElementById('options');
+            var form = document.getElementById('Search');
+
+            inputField.addEventListener('focus', showDropdown);
+            // add event listener for a click anywhere on the wepage
+            document.body.addEventListener('click', checkFocus);
+            
+            function showDropdown() {
+                dropdownMenu.style.display = 'block';
+            }
+            // check if the focus is within the form, hide the dropdown if the focus is outside the form
+            function checkFocus(event) {
+                if (!form.contains(event.target)) {
+                    dropdownMenu.style.display = 'none';
+                }
+            }
+            
         </script>
     </form>
 
     <!-- --------team search area-------- -->
-    <form action="/team_scrape" method="POST">
+    <form action="/team_scrape" method="POST" id="Team_Search">
         <label for="team_url">Team Search:</label>
         <input type="input" id="team_url" name="team_url" required oninput="getTeamOptions(this.value)">
+        <button type="submit">Search</button> 
         <!-- Teams Dropdown Box  -->
-        <select name="team_options" id="team_options" size="10" onchange="fillTeamInput(this.value)"></select>
-        <button type="submit">Search</button>
+        <select name="team_options" id="team_options" size="10" onchange="fillTeamInput(this.value)"></select>  
 
         <script>
             function getTeamOptions(searchValue) {
@@ -87,6 +106,24 @@
             function fillTeamInput(selectedValue) {
                 const input = document.getElementById("team_url")
                 input.value = selectedValue;
+            }
+// managing the team dropdown visibility
+            var TeamInputField = document.getElementById('team_url');
+            var TeamDropdownMenu = document.getElementById('team_options');
+            var team_form = document.getElementById('Team_Search');
+
+            TeamInputField.addEventListener('focus', showTeamDropdown);
+            // add event listener for a click anywhere on the wepage
+            document.body.addEventListener('click', TeamCheckFocus);
+            
+            function showTeamDropdown() {
+                TeamDropdownMenu.style.display = 'block';
+            }
+            // check if the focus is within the form, hide the dropdown if the focus is outside the form
+            function TeamCheckFocus(event) {
+                if (!team_form.contains(event.target)) {
+                    TeamDropdownMenu.style.display = 'none';
+                }
             }
         </script>
     </form>

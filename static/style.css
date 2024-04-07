@@ -55,7 +55,40 @@ nav ul li a:hover::after{
     margin-top: 13%;
     font-size: 30px;
 }
+.header-text p{
+    padding: 0px 30px;
+}
 .header-text h1{
     font-size: 60px;
     margin-top: 20px;
+    padding: 0px 20px;
+}
+.header-text h1 span{
+    color: #0077b5;
+}
+form button{
+    background: #080808;
+    color: #fff;
+    display: inline-block   ;
+    margin: 50px auto;
+    width: fit-content;
+    border: 1px solid #0077b5;
+    padding: 14px 50px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.5s;
+}
+form button:hover{
+    background: #0077b5;
+}
+#Search {
+    width: 50%;
+    margin-top: 10%;
+}
+#options{
+    display: none;
+}
+
+#team_options{
+    display: none;
 }
