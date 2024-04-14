@@ -30,9 +30,10 @@
 <!-- -------player search area------------ -->
     <form action="/scrape" method="POST" id="Search">
         <label for="url">Player Search:</label>
-        <input type="text" id="url" name="url" required oninput="getOptions(this.value)">
-        <button type="submit">Search</button>
-
+        <div class="input-container">
+            <input type="text" id="url" name="url" required oninput="getOptions(this.value)">
+            <button type="submit">Search</button>    
+        </div>
         <!--Code for Dropdown menu upon selecting the input section of the form-->
         <select name="options" id="options" size="10" onchange="fillInput(this.value)"> <!-- size limits number of entries shown when the dropdown opens-->
         </select>
@@ -82,8 +83,10 @@
     <!-- --------team search area-------- -->
     <form action="/team_scrape" method="POST" id="Team_Search">
         <label for="team_url">Team Search:</label>
-        <input type="input" id="team_url" name="team_url" required oninput="getTeamOptions(this.value)">
-        <button type="submit">Search</button> 
+        <div class="input-container">
+            <input type="input" id="team_url" name="team_url" required oninput="getTeamOptions(this.value)">
+            <button type="submit">Search</button> 
+        </div>
         <!-- Teams Dropdown Box  -->
         <select name="team_options" id="team_options" size="10" onchange="fillTeamInput(this.value)"></select>  
 

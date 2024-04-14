@@ -23,6 +23,7 @@ nav{
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    height: 60px;
 }
 .logo{
     width: 140px;
@@ -66,13 +67,35 @@ nav ul li a:hover::after{
 .header-text h1 span{
     color: #0077b5;
 }
+
+/* Player Search Bar */
+#url, #team_url{
+    height: 40px;
+    width: 300px;  
+    margin-left: 20px;
+    flex: 1;
+}
+#options, #team_options{
+    display: none;
+    height: 100px;
+    width: 650px;
+    margin-left: 20px;
+}
+form label{
+    margin-left: 20px;
+    color: #0077b5;
+    font-size: 18px;
+    font-weight: bold;   
+}
+
 form button{
     background: #080808;
     color: #fff;
-    display: inline-block   ;
-    margin: 50px auto;
-    width: fit-content;
-    border: 1px solid #0077b5;
+    display: inline-block;
+    /* margin: 50px auto; */
+    margin-left: auto;
+    width: auto;
+    border: 1px solid #080808;
     padding: 14px 50px;
     border-radius: 6px;
     text-decoration: none;
@@ -81,14 +104,16 @@ form button{
 form button:hover{
     background: #0077b5;
 }
-#Search {
+/* form */
+#Search, #Team_Search{
     width: 50%;
     margin-top: 10%;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+    margin-bottom: 10px;
 }
-#options{
-    display: none;
-}
-
-#team_options{
-    display: none;
+.input-container{
+    display: flex;
+    gap: 10px;
 }
