@@ -6,35 +6,37 @@
 }
 body{
     color: #080808;
-    background-image: url('images/nba_logo.jpg');
-    background-size: cover;
-    background-position: center;
 }
 header{
     width: 100%;
-    height: 60vh;
+    height: 75vh;
+    background-image: url('images/nba_logo.jpg');
+    background-size: cover;
+    background-position: center top;
 }
 .nav-container{
-    padding: 10px 10%;
+    padding: 10px;
     background-color: #fff;
 }
 nav h1{
     color: #000000;
+    margin-left: 20px;
+    font-size: 30px;
 }
 nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    height: 40px;   
+    height: 45px;   
 }
 .logo{
-    width: 140px;
+    width: 200px;
 }
 nav ul li{
     display: inline-block;
     list-style: none;
-    margin: 10px 20px;
+    margin: 10px 25px;
 }
 nav ul li a{
     color: #000000;
@@ -81,9 +83,9 @@ nav ul li a:hover::after{
 #options, #team_options{
     display: none;
     height: 100px;
-    width: 650px;
+    width: 1000px;
     margin-left: 20px;
-    background-color: #afcfee;
+    background-color: #fff;
     font-size: 14px;
 }
 #options option, #team_options option{
@@ -92,8 +94,8 @@ nav ul li a:hover::after{
 
 form label{
     margin-left: 20px;
-    color: #fff;
-    font-size: 18px;
+    color: #000;
+    font-size: 22px;
     font-weight: bold;   
 }
 
@@ -109,6 +111,7 @@ form button{
     border-radius: 6px;
     text-decoration: none;
     transition: background 0.5s;
+    height: 40px;
 }
 form button:hover{
     background: #0077b5;
@@ -116,7 +119,7 @@ form button:hover{
 /* form */
 #Search, #Team_Search{
     width: 50%;
-    margin-top: 10%;
+    margin-top: 3%;
     display: grid;
     grid-template-columns: auto;
     gap: 10px;
