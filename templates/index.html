@@ -32,11 +32,12 @@
         <label for="url">Player Search:</label>
         <div class="input-container">
             <input type="text" id="url" name="url" required oninput="getOptions(this.value)">
-            <button type="submit">Search</button>    
+            <button type="submit">Search</button>
         </div>
+
         <!--Code for Dropdown menu upon selecting the input section of the form-->
-        <select name="options" id="options" size="10" onchange="fillInput(this.value)"> <!-- size limits number of entries shown when the dropdown opens-->
-        </select>
+        <select name="options" id="options" size="10" onchange="fillInput(this.value)"> <!-- size limits number of entries shown when the dropdown opens--> </select>
+            
 
         <script>
             function getOptions(searchValue) {
@@ -63,12 +64,17 @@
             var dropdownMenu = document.getElementById('options');
             var form = document.getElementById('Search');
 
-            inputField.addEventListener('focus', showDropdown);
+            // everytime the input changes, check if the string is empty and determine whether to display the dropdown
+            inputField.addEventListener('input', showDropdown);
             // add event listener for a click anywhere on the wepage
             document.body.addEventListener('click', checkFocus);
             
             function showDropdown() {
-                dropdownMenu.style.display = 'block';
+                if (inputField.value.trim() !== '') {
+                    dropdownMenu.style.display = 'block';
+                } else {
+                    dropdownMenu.style.display = 'none';
+                }
             }
             // check if the focus is within the form, hide the dropdown if the focus is outside the form
             function checkFocus(event) {
@@ -77,6 +83,21 @@
                 }
             }
             
+            // Adding an event listener for the arrow down key
+            inputField.addEventListener('keydown', function(event) {
+                if (dropdownMenu.style.display == 'block' && event,key == 'ArrowDown') {
+                    var options = dropdownMenu.querySelectorAll('option');
+                    var selectedIndex = Array.from(options).findIndex(option => option.selected);
+
+                    // moving to the first option if you reach the last option
+                    if (selectedIndex === -1 || selectedIndex === options.length - 1) {
+                        options[0].selected = true;
+                    } else {
+                        // moving to the next option
+                        options[selectedIndex+1].selected = true;
+                    }
+                }
+            })
         </script>
     </form>
 

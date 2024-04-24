@@ -79,11 +79,11 @@ nav ul li a:hover::after{
     width: 300px;  
     margin-left: 20px;
     flex: 1;
+    box-sizing: border-box;
 }
 #options, #team_options{
     display: none;
     height: 100px;
-    width: 1000px;
     margin-left: 20px;
     background-color: #fff;
     font-size: 14px;
@@ -102,7 +102,6 @@ form label{
 form button{
     background: #080808;
     color: #fff;
-    display: inline-block;
     /* margin: 50px auto; */
     margin-left: auto;
     width: auto;
@@ -112,6 +111,7 @@ form button{
     text-decoration: none;
     transition: background 0.5s;
     height: 40px;
+    cursor: pointer;
 }
 form button:hover{
     background: #0077b5;
@@ -122,10 +122,8 @@ form button:hover{
     margin-top: 3%;
     display: grid;
     grid-template-columns: auto;
-    gap: 10px;
     margin-bottom: 10px;
 }
 .input-container{
     display: flex;
-    gap: 10px;
 }
