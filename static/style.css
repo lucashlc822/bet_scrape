@@ -124,6 +124,3 @@ form button:hover{
     grid-template-columns: auto;
     margin-bottom: 10px;
 }
-.input-container{
-    display: flex;
-}
