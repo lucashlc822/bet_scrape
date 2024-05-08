@@ -32,13 +32,13 @@
         <form action="/scrape" method="POST" id="Search">
             <label for="url">Player Search:</label>
             <div class="input-container">
-                <input type="text" id="url" name="url" required oninput="getOptions(this.value)">
-                <button type="submit">Search</button>
+                <div class="input-row">
+                    <input type="text" id="url" name="url" required oninput="getOptions(this.value)">
+                    <button type="submit" class="submit-btn">Search</button>
+                </div>
+                <!--Code for Dropdown menu upon selecting the input section of the form-->
+                <select name="options" id="options" size="10" onchange="fillInput(this.value)"> <!-- size limits number of entries shown when the dropdown opens--> </select>
             </div>
-    
-            <!--Code for Dropdown menu upon selecting the input section of the form-->
-            <select name="options" id="options" size="10" onchange="fillInput(this.value)"> <!-- size limits number of entries shown when the dropdown opens--> </select>
-                
     
             <script>
                 function getOptions(searchValue) {
@@ -72,7 +72,7 @@
                 
                 function showDropdown() {
                     if (inputField.value.trim() !== '') {
-                        dropdownMenu.style.display = 'block';
+                        dropdownMenu.style.display = 'flex';
                     } else {
                         dropdownMenu.style.display = 'none';
                     }
@@ -106,11 +106,13 @@
         <form action="/team_scrape" method="POST" id="Team_Search">
             <label for="team_url">Team Search:</label>
             <div class="input-container">
-                <input type="input" id="team_url" name="team_url" required oninput="getTeamOptions(this.value)">
-                <button type="submit">Search</button> 
+                <div class="input-row">
+                    <input type="input" id="team_url" name="team_url" required oninput="getTeamOptions(this.value)">
+                    <button type="submit" class="submit-btn">Search</button> 
+                </div>
+                <!-- Teams Dropdown Box  -->
+                <select name="team_options" id="team_options" size="10" onchange="fillTeamInput(this.value)"></select>  
             </div>
-            <!-- Teams Dropdown Box  -->
-            <select name="team_options" id="team_options" size="10" onchange="fillTeamInput(this.value)"></select>  
     
             <script>
                 function getTeamOptions(searchValue) {

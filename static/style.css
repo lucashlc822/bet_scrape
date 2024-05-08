@@ -75,50 +75,67 @@ nav ul li a:hover::after{
 
 /* Player Search Bar */
 #url, #team_url{
-    height: 40px;
-    width: 300px;  
+    height: 50px; 
     margin-left: 20px;
+    padding: 10px;
     flex: 1;
     box-sizing: border-box;
+    font-size: 15px;
 }
+.input-container{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+.input-row{
+    display: flex;
+    width: 100%;
+    margin-bottom: 0px;
+}
+/* select box */
 #options, #team_options{
+    width: calc(100% - 17px);
     display: none;
-    height: 100px;
     margin-left: 20px;
     background-color: #fff;
     font-size: 14px;
+    overflow-y: auto;
+    height: 100px;
 }
 #options option, #team_options option{
     padding-top: 6px;
+    padding-left: 10px;
+    font-size: 15px;
 }
 
 form label{
     margin-left: 20px;
+    margin-bottom: 5px;
     color: #000;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;   
 }
 
-form button{
+.submit-btn{
     background: #080808;
     color: #fff;
     /* margin: 50px auto; */
-    margin-left: auto;
-    width: auto;
+    margin-left: 10px;
     border: 1px solid #080808;
     padding: 14px 50px;
     border-radius: 6px;
     text-decoration: none;
     transition: background 0.5s;
-    height: 40px;
+    height: 50px;
     cursor: pointer;
+    font-size: 18px;
 }
 form button:hover{
     background: #0077b5;
 }
-/* form */
+/* form fomratting*/
 #Search, #Team_Search{
-    width: 50%;
+    width: 600px;
     margin-top: 3%;
     display: grid;
     grid-template-columns: auto;
