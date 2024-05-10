@@ -34,7 +34,7 @@
             <div class="input-container">
                 <div class="input-row">
                     <input type="text" id="url" name="url" required oninput="getOptions(this.value)">
-                    <button type="submit" class="submit-btn">Search</button>
+                    <button type="submit" class="submit-btn" id="player-button">Search</button>
                 </div>
                 <!--Code for Dropdown menu upon selecting the input section of the form-->
                 <select name="options" id="options" size="10" onchange="fillInput(this.value)"> <!-- size limits number of entries shown when the dropdown opens--> </select>
@@ -86,19 +86,58 @@
                 
                 // Adding an event listener for the arrow down key
                 inputField.addEventListener('keydown', function(event) {
-                    if (dropdownMenu.style.display == 'block' && event,key == 'ArrowDown') {
-                        var options = dropdownMenu.querySelectorAll('option');
-                        var selectedIndex = Array.from(options).findIndex(option => option.selected);
-    
-                        // moving to the first option if you reach the last option
-                        if (selectedIndex === -1 || selectedIndex === options.length - 1) {
-                            options[0].selected = true;
-                        } else {
-                            // moving to the next option
-                            options[selectedIndex+1].selected = true;
+                    if (event.key == 'ArrowDown') {
+                        event.preventDefault();
+
+                        if (dropdownMenu.style.display == 'flex' && event.key == 'ArrowDown') {
+                            var options = dropdownMenu.querySelectorAll('option');
+                            var selectedIndex = Array.from(options).findIndex(option => option.selected);
+
+                            // moving to the first option if you reach the last option
+                            if (selectedIndex === -1 || selectedIndex === options.length - 1) {
+                                options[0].selected = true;
+                            } else {
+                                // moving to the next option
+                                options[selectedIndex+1].selected = true;
+                            }
+                            dropdownMenu.focus();
+                            inputField.value = dropdownMenu.value;
+                        }
+                    }
+                    // Arrow up looping to the last option.
+                    if (event.key == 'ArrowUp') {
+                        event.preventDefault();
+
+                        if (dropdownMenu.style.display == 'flex' && event.key == 'ArrowUp') {
+                            var options = dropdownMenu.querySelectorAll('option');
+                            var selectedIndex = Array.from(options).findIndex(option => option.selected);
+        
+                            // moving to the last option if you reach the last option
+                            if (selectedIndex === 0) {
+                                options[options.length-1].selected = true;
+                            } else {
+                                // moving to the next option
+                                options[selectedIndex-1].selected = true;
+                            }
                         }
                     }
                 })
+
+                //Pressing Enter initiates the button action
+                dropdownMenu.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        document.getElementById('player-button').click();
+                    }
+                    // Backspace directs you back to the input box
+                    if (event.key === 'Backspace') {
+                        event.preventDefault();
+                        inputField.focus();
+                    }
+                })
+
+
+                // Event listener for filling in the input box based on what is selected in the options box.
             </script>
         </form>
     
