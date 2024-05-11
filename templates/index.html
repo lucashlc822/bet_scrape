@@ -194,5 +194,33 @@
             </script>
         </form>
     </div>
+
+    <!-- Todays Scores -->
+    <div class="scores-container">
+        <h1>Today's Scores</h1>
+        <p id="currentDate">Here are the statlines for all games on </p>
+        <script>
+            function updateDate() {
+                // getting current date
+                var now = new Date();
+
+                // Make an array for the Month names
+                var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                // Format date to the desired format (MM-DD-YYYY)
+                var formattedDate = monthNames[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+                
+                // assign the formattedDate to the HTML Element
+                var currentDateElement = document.getElementById('currentDate');
+                currentDateElement.innerHTML += formattedDate;
+            }
+            updateDate();
+        </script>
+    </div>
+
+    <!-- footer -->
+    <div class="copyright">
+        <p>Copyright 2024. Made by Lucas Chung, Developer for LHLC</p>
+    </div>
 </body>
 </html>
