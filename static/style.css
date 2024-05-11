@@ -83,7 +83,8 @@ nav ul li a:hover::after{
     font-size: 15px;
 }
 .input-container{
-    display: flex;
+    display: flex inline-block;
+    position: relative;
     flex-direction: column;
     width: 600px;
 }
@@ -101,6 +102,8 @@ nav ul li a:hover::after{
     font-size: 14px;
     overflow-y: auto;
     height: 100px;
+    position: absolute;
+    z-index: 1;
 }
 #options option, #team_options option{
     padding-top: 6px;
