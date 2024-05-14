@@ -11,7 +11,7 @@ import pandas as pd
 #Create a Flask web application instance named app.
 app = Flask(__name__, static_url_path='/static')
 
-
+nba_refernce_main_url = "https://www.basketball-reference.com/"
 #Initalize MongoDB
 uri = "mongodb+srv://lucashlc:NBAurl12345@nba.kewvdct.mongodb.net/?retryWrites=true&w=majority" 
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -26,10 +26,30 @@ db = client["players"]
 collection = db["URL"]
 collection2 = db["teams_url"]
 
+# Game Scores
+def score_scrape(url):
+    # Scrape NBA games scores.
+    scores_response = requests.get(url)
+    scores_response.raise_for_status()
+    
+    soup = BeautifulSoup(scores_response.text, 'html.parser')
+    scores_div_name = 'game_summary'
+    scores_class = soup.find_all('div', {'class': scores_div_name})
+    print(len(scores_class))
+    
+    games = {}
+    # if scores_class:
+        # for i in range(len(scores_class)-1):
+            # games["game" + (i+1)] = scores_class[i]
+    # print(games)
+    return scores_class
+            
+
 #Define a route for the root URL ('/'). When a user accesses the root URL, the index function is called. This function renders the index.html template.
 @app.route('/')
 def index():
-    return render_template('index.html')
+    scores_content = score_scrape(nba_refernce_main_url)
+    return render_template('index.html', scores_content=scores_content)
 
 #Route for dropdown menu
 @app.route('/get_options')
