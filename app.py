@@ -35,14 +35,13 @@ def score_scrape(url):
     soup = BeautifulSoup(scores_response.text, 'html.parser')
     scores_div_name = 'game_summary'
     scores_class = soup.find_all('div', {'class': scores_div_name})
-    print(len(scores_class))
     
     games = {}
-    # if scores_class:
-        # for i in range(len(scores_class)-1):
-            # games["game" + (i+1)] = scores_class[i]
-    # print(games)
-    return scores_class
+    if scores_class:
+        for i in range(len(scores_class)):
+            adder = str(i+1)
+            games["game" + adder] = scores_class[i]
+    return games
             
 
 #Define a route for the root URL ('/'). When a user accesses the root URL, the index function is called. This function renders the index.html template.

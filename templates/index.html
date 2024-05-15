@@ -199,7 +199,14 @@
     <div class="scores-container">
         <h1>Today's Scores</h1>
         <p id="currentDate">Here are the statlines for all games on </p>
-        {{games.game1}}
+        <!-- Games -->
+        <div id="games-container">
+            <!-- creates a div for each game found by flask -->
+            {% for value in scores_content.values() | list%}
+                <h2>Game {{loop.index}}</h1>
+                <div class="recent-games">{{value | safe}}</div>
+            {% endfor %}
+        </div>
         <script>
             function updateDate() {
                 // getting current date
