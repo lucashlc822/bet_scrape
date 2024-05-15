@@ -203,7 +203,7 @@
         <div id="games-container">
             <!-- creates a div for each game found by flask -->
             {% for value in scores_content.values() | list%}
-                <h2>Game {{loop.index}}</h1>
+                <h2>Game {{loop.index}}</h1> 
                 <div class="recent-games">{{value | safe}}</div>
             {% endfor %}
         </div>
