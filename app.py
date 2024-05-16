@@ -12,6 +12,7 @@ import pandas as pd
 app = Flask(__name__, static_url_path='/static')
 
 nba_refernce_main_url = "https://www.basketball-reference.com/"
+
 #Initalize MongoDB
 uri = "mongodb+srv://lucashlc:NBAurl12345@nba.kewvdct.mongodb.net/?retryWrites=true&w=majority" 
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -157,6 +158,7 @@ def team_scrape():
 
     if search_document:
         stats_url = search_document.get('Stats URL', 'Default Value') #Returns Default Value if the URL key is not found.
+        print(stats_url)
         record_url = search_document.get('Record URL', 'Default Value')
     else:
         stats_url = 'No match found' #need to make a route for when a player is not found. will require new html.
@@ -164,15 +166,20 @@ def team_scrape():
     #search collection and find a row where the Player key matches the serached name from the form.
     
     try:
-        # response for stats url
+        # Team Stats Section
         response1 = requests.get(stats_url)
         response1.raise_for_status() #returns HTTP error object if error occured when tryig to get a response from the URL
+        
+        stats_soup = BeautifulSoup(response1.text, 'html.parser') #create soup object
+        table_id = "all_team_and_opponent"
+        stats_table = stats_soup.find_all('div', {'class': table_id})
+        print(stats_table)
         
         # response for record url
         response2 = requests.get(record_url)
         response2.raise_for_status()
 
-        stats_soup = BeautifulSoup(response1.text, 'html.parser')
+       
         record_soup = BeautifulSoup(response2.text, 'html.parser')
 
         title = stats_soup.title.string if stats_soup.title else 'No title found'
@@ -190,21 +197,21 @@ def team_scrape():
         team_stats_table = stats_soup.find('table', id='team_and_opponent')
 
         # Check if the table is found
-        if team_stats_table:
-            # Find the headers
-            headers = [th.text for th in team_stats_table.find_all('th')]
+        # if team_stats_table:
+        #     # Find the headers
+        #     headers = [th.text for th in team_stats_table.find_all('th')]
             
-            # Find data rows
-            data_rows = team_stats_table.find_all('tr')[2:]  # Skip the first two rows as they contain headers and totals
+        #     # Find data rows
+        #     data_rows = team_stats_table.find_all('tr')[2:]  # Skip the first two rows as they contain headers and totals
             
-            # Extract and print the data
-            print("Team Stats:")
-            print("\t".join(headers))
-            for row in data_rows:
-                cells = [cell.text.strip() for cell in row.find_all(['th', 'td'])]
-                print("\t".join(cells))
-        else:
-            print("Team stats table not found.")
+        #     # Extract and print the data
+        #     print("Team Stats:")
+        #     print("\t".join(headers))
+        #     for row in data_rows:
+        #         cells = [cell.text.strip() for cell in row.find_all(['th', 'td'])]
+        #         print("\t".join(cells))
+        # else:
+        #     print("Team stats table not found.")
 
         data = {
             'title': title,
