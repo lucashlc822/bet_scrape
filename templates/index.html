@@ -209,7 +209,7 @@
                             var selectedIndex = Array.from(options).findIndex(option => option.selected);
 
                             //mov eto first option if reach last option
-                            if (selectedIndex === -1 || selectedIndex === options.length -1) {
+                            if (selectedIndex === -1 || selectedIndex === options.length - 1) {
                                 options[0].selected = true;
                             } else {
                                 options[selectedIndex+1].selected = true;
@@ -224,13 +224,15 @@
                         event.preventDefault();
                         
                         if (TeamDropdownMenu.style.display = 'flex' && event.key == 'ArrowUp') {
-                            var options = TeamDropdownMenu.querySelectorAll('option');
-                            var selectedIndex = Array.from(options).findIndex(option => option.selected);
+                            event.preventDefault();
+                            var team_options = TeamDropdownMenu.querySelectorAll('option');
+                            var team_selectedIndex = Array.from(team_options).findIndex(option => option.selected);
+                            print(team_options)
 
-                            if (selectedIndex === 0) {
-                                options[options.length-1].selected = true;
+                            if (team_selectedIndex === 0) {
+                                team_options[team_options.length - 1].selected = true;
                             } else {
-                                options[selectedIndex-1].selected = true;
+                                team_options[team_selectedIndex-1].selected = true;
                             }
                         }
                     }
