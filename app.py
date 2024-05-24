@@ -34,8 +34,16 @@ def score_scrape(url):
     scores_response.raise_for_status()
     
     soup = BeautifulSoup(scores_response.text, 'html.parser')
+    
+    # Data cleaning
+    
+    #remove all hyperlinks
+    for a_tag in soup.find_all('a'):
+        del a_tag['href']
+        
     scores_div_name = 'game_summary'
     scores_class = soup.find_all('div', {'class': scores_div_name})
+    
     
     games = {}
     if scores_class:

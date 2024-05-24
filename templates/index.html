@@ -96,7 +96,7 @@
 
                             // moving to the first option if you reach the last option
                             if (selectedIndex === -1 || selectedIndex === options.length - 1) {
-                                options[0].selected = true;
+                                options[1].selected = true;
                             } else {
                                 // moving to the next option
                                 options[selectedIndex+1].selected = true;
@@ -257,13 +257,13 @@
 
     <!-- Todays Scores -->
     <div class="scores-container">
-        <h1>Today's Scores</h1>
-        <p id="currentDate">Here are the statlines for all games on </p>
+        <h1>Recent Games</h1>
+        <p id="currentDate"></p>
         <!-- Games -->
         <div id="games-container">
             <!-- creates a div for each game found by flask -->
             {% for value in scores_content.values() | list%}
-                <h2>Game {{loop.index}}</h1> 
+                <h2>Game {{loop.index}}</h2> 
                 <div class="recent-games">{{value | safe}}</div>
             {% endfor %}
         </div>
@@ -280,7 +280,7 @@
                 
                 // assign the formattedDate to the HTML Element
                 var currentDateElement = document.getElementById('currentDate');
-                currentDateElement.innerHTML += formattedDate;
+                currentDateElement.innerHTML = "Here are the statlines for recent games to " + "<strong>" + formattedDate + "</strong>";
             }
             updateDate();
         </script>
